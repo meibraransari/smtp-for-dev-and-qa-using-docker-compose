@@ -25,12 +25,12 @@ services:
       MP_MAX_MESSAGES: 5000    
       
       # 🔐 SMTP Authentication (file-based - multiple users)
-      MP_SMTP_AUTH_FILE: /config/smtp-auth.txt
+      MP_SMTP_AUTH_FILE: /configs/smtp-auth.txt
       MP_SMTP_AUTH_ACCEPT_ANY: 0   # Require authentication
       MP_SMTP_AUTH_ALLOW_INSECURE: 1  # Allow auth without TLS (for local dev)
       
       # 🔐 Web UI Authentication (file-based - multiple users)
-      MP_UI_AUTH_FILE: /config/ui-auth.txt
+      MP_UI_AUTH_FILE: /configs/ui-auth.txt
       
       # ⚙️ Optional: Enable TLS (if needed)
       # MP_SMTP_TLS_CERT: /certs/cert.pem
@@ -38,26 +38,26 @@ services:
       
     volumes:
       - ./mailpit-data:/data          # Persistent mail database
-      - ./config:/config:ro           # Config directory (read-only)
+      - ./configs:/configs:ro           # configs directory (read-only)
       # Optional: TLS certificates
       # - ./certs:/certs:ro
 ```
 
 
 
-## 📁 2. Create the Configuration Directory
+## 📁 2. Create the configsuration Directory
 
-Create a folder named **`config`** in the same directory as your `docker-compose.yml`:
+Create a folder named **`configs`** in the same directory as your `docker-compose.yml`:
 
 ```bash
-mkdir config
+mkdir configs
 ```
 
-Inside the `config` folder, create the following two files 👇
+Inside the `configs` folder, create the following two files 👇
 
 
 
-### 📨 `config/smtp-auth.txt`
+### 📨 `configs/smtp-auth.txt`
 
 Used for **SMTP authentication** — your apps or scripts use these credentials to send emails.
 
@@ -83,7 +83,7 @@ admin:admin123
 
 
 
-### 🌐 `config/ui-auth.txt`
+### 🌐 `configs/ui-auth.txt`
 
 Used for **Web UI authentication** — you’ll need these credentials to log into Mailpit’s dashboard.
 
@@ -152,7 +152,7 @@ Log in with one of the Web UI users (from `ui-auth.txt`):
 
 ## ✉️ 6. Send a Test Email
 
-Use `curl` or your app’s SMTP configuration to test sending an email:
+Use `curl` or your app’s SMTP configsuration to test sending an email:
 
 ```bash
 curl --url 'smtp://localhost:1025' \
@@ -180,10 +180,10 @@ Stop Mailpit safely:
 docker compose down
 ```
 
-Your stored messages and config remain in:
+Your stored messages and configs remain in:
 
 * `./mailpit-data` → mail storage
-* `./config` → authentication files
+* `./configs` → authentication files
 
 
 
@@ -193,7 +193,7 @@ Your stored messages and config remain in:
 project-folder/
 ├── docker-compose.yml
 ├── mailpit-data/
-└── config/
+└── configs/
     ├── smtp-auth.txt
     └── ui-auth.txt
 ```
