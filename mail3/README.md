@@ -106,7 +106,7 @@ viewer:viewer123
 ## 🧠 3. Understanding Authentication
 
 | 🔧 Setting                    | 💬 Description                                               |
-| -- |  |
+| -- | -- |
 | `MP_SMTP_AUTH_FILE`           | Points to the file listing all SMTP usernames and passwords. |
 | `MP_UI_AUTH_FILE`             | Points to the file listing Web UI usernames and passwords.   |
 | `MP_SMTP_AUTH_ACCEPT_ANY`     | `0` means authentication is required.                        |
