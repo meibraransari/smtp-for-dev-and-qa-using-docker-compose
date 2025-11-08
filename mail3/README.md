@@ -123,6 +123,7 @@ Run the following command:
 
 ```bash
 docker compose up -d
+docker logs -f mailpit
 ```
 
 ✅ This will:

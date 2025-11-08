@@ -43,6 +43,7 @@ Run the following command in the same directory as your `docker-compose.yml`:
 
 ```bash
 docker compose up -d
+docker logs -f mailpit
 ```
 
 ✅ This will pull the Mailpit image, start the container, and expose the ports.

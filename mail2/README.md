@@ -64,6 +64,7 @@ Run this command in the same directory as your `docker-compose.yml`:
 
 ```bash
 docker compose up -d
+docker logs -f mailpit
 ```
 
 ✅ This will:
