@@ -86,9 +86,9 @@ project-root/
 
 Pick one of the examples based on your needs:
 
-* **`mail1`** → simplest setup (no auth)
-* **`mail2`** → single-user (auth via env vars)
-* **`mail3`** → multi-user (auth via config files)
+* **[`mail1/`](./mail1)** → simplest setup (no auth)
+* **[`mail2/`](./mail2)** → single-user (auth via env vars)
+* **[`mail3/`](./mail3)** → multi-user (auth via config files)
 
 ### 2️⃣ Run the container
 
