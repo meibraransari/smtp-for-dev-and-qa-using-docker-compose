@@ -8,9 +8,11 @@ services:
       - "8025:8025"  # Web UI
       - "1025:1025"  # SMTP
     environment:
-      TZ: Europe/London 
+      TZ: Europe/London
+      MP_VERBOSE: true # Enable debug logging 
       # Database
-      MP_MAX_MESSAGES: 5000    
+      MP_MAX_MESSAGES: 5000 
+      MP_DATABASE: /data   
       # SMTP Authentication (file-based - multiple users)
       MP_SMTP_AUTH_FILE: /config/smtp-auth.txt
       MP_SMTP_AUTH_ACCEPT_ANY: 0  # Require authentication
@@ -24,8 +26,13 @@ services:
       # MP_SMTP_TLS_KEY: /certs/key.pem
       
     volumes:
-      - ./mailpit-data:/data
+      - ./mailpit-data:/data  # Separate database
       - ./configs:/config:ro  # Mount config directory as read-only
       # Optional: TLS certificates
       # - ./certs:/certs:ro
-
+    healthcheck:
+      test: ["CMD", "/mailpit", "readyz"]
+      interval: 15s
+      start_period: 10s
+      timeout: 30s      # optional (default is 30s)
+      retries: 3        # optional (default is 3)
