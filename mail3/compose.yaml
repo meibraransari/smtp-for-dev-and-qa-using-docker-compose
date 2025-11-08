@@ -1,6 +1,7 @@
 services:
   mailpit:
     image: axllent/mailpit:latest
+    #image: ibraransaridocker/mailpit:latest
     container_name: mailpit
     restart: unless-stopped
     ports:

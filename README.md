@@ -93,7 +93,8 @@ Pick one of the examples based on your needs:
 ### 2️⃣ Run the container
 
 ```bash
-git clone https://github.com/meibraransari/smtp-for-dev-and-qa-using-docker-compose.git
+git clone https://github.com/meibraransari/smtp-for-dev-and-qa-using-docker-compose.git 
+cd smtp-for-dev-and-qa-using-docker-compose
 cd mail1   # or mail2, mail3
 docker compose up -d
 ```
