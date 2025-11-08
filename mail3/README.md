@@ -13,34 +13,42 @@ Create a file named **`docker-compose.yml`** and paste the following content:
 services:
   mailpit:
     image: axllent/mailpit:latest
+    #image: ibraransaridocker/mailpit:latest
     container_name: mailpit
     restart: unless-stopped
     ports:
-      - "8025:8025"  # 🌐 Web UI
-      - "1025:1025"  # 📮 SMTP
+      - "8025:8025"  # Web UI
+      - "1025:1025"  # SMTP
     environment:
-      TZ: Europe/London 
-      
-      # 💾 Database
-      MP_MAX_MESSAGES: 5000    
-      
-      # 🔐 SMTP Authentication (file-based - multiple users)
+      TZ: Europe/London
+      MP_VERBOSE: true # Enable debug logging 
+      # Database
+      MP_MAX_MESSAGES: 5000 
+      MP_DATABASE: /data   
+      # SMTP Authentication (file-based - multiple users)
       MP_SMTP_AUTH_FILE: /configs/smtp-auth.txt
-      MP_SMTP_AUTH_ACCEPT_ANY: 0   # Require authentication
-      MP_SMTP_AUTH_ALLOW_INSECURE: 1  # Allow auth without TLS (for local dev)
+      MP_SMTP_AUTH_ACCEPT_ANY: 0  # Require authentication
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
       
-      # 🔐 Web UI Authentication (file-based - multiple users)
+      # Web UI Authentication (file-based - multiple users)
       MP_UI_AUTH_FILE: /configs/ui-auth.txt
       
-      # ⚙️ Optional: Enable TLS (if needed)
+      # Optional: TLS Support
       # MP_SMTP_TLS_CERT: /certs/cert.pem
       # MP_SMTP_TLS_KEY: /certs/key.pem
       
     volumes:
-      - ./mailpit-data:/data          # Persistent mail database
-      - ./configs:/configs:ro           # configs directory (read-only)
+      - ./mailpit-data:/data  # Separate database
+      - ./configs:/configs:ro  # Mount configs directory as read-only
       # Optional: TLS certificates
       # - ./certs:/certs:ro
+    healthcheck:
+      test: ["CMD", "/mailpit", "readyz"]
+      interval: 15s
+      start_period: 10s
+      timeout: 30s      # optional (default is 30s)
+      retries: 3        # optional (default is 3)
+
 ```
 
 
